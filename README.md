@@ -18,43 +18,43 @@
 
 2、之后将新创建的inode保存到server。i-table被持久保存在服务器上，通过version structure更改user和group的i-tables。VSL作为一个字段元组列表实现，类似于SUNDR论文，但只跟踪最近的VS。通过对VS元组的非签名部分进行非对称加密来验证签名。用户的更新将包括所有组i句柄，以便处理同一用户的多个更新，而不会覆盖以前的更新。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps17.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%872.png) 
 
 3、签名与验证的实现利用利用Cryptography库的签名与验证函数。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps18.jpg)![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps19.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%873.png)![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%874.png) 
 
 4、更新版本结构（Version Structure），更新前签名，拿vs与过去用户手上的vs做对比，最后更新用户的vs。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps20.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%875.png) 
 
 5、在pre中，获得全局锁，执行文件操作之前，调用pre，获取VSL，更新current_itable使用了VSL中的fetch_vs获取专有用户的VS，使用了查找到所有的group_handle的函数。post中释放锁，更新服务器上的VSL。最后更新用户手上的VSL。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps21.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%876.png) 
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps22.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%877.png) 
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps23.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%878.png) 
 
 6、在crypto中实现加密和解密。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps24.jpg)![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps25.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%879.png)![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%8710.png) 
 
 ### 3、实验结果 
 
 1、创建文件或文件夹。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps26.jpg)![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps27.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%8711.png)![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%8712.png) 
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps28.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%8713.png) 
 
 2、运行./test.sh。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps29.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%8714.png) 
 
 3、运行./test-all.sh。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps30.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%8715.png) 
 
 ### 4、心得总结
 

@@ -14,7 +14,7 @@
 
 1、实现文件系统对多客户端的支持。首先补全secfs/fs.py文件中的_create 的函数，完善文件系统创建文件和目录的功能。代码如下。
 
-![img](file:///C:\Users\26797\AppData\Local\Temp\ksohtml8256\wps16.jpg) 
+![img](https://github.com/andone-07/File-System-SecFS/blob/master/image/%E5%9B%BE%E7%89%871.png) 
 
 2、之后将新创建的inode保存到server。i-table被持久保存在服务器上，通过version structure更改user和group的i-tables。VSL作为一个字段元组列表实现，类似于SUNDR论文，但只跟踪最近的VS。通过对VS元组的非签名部分进行非对称加密来验证签名。用户的更新将包括所有组i句柄，以便处理同一用户的多个更新，而不会覆盖以前的更新。
 
